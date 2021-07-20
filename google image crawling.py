@@ -54,6 +54,8 @@ def image_download(search):
             image.click()
             time.sleep(1)
             imgUrl = driver.find_element_by_xpath('//*[@id="Sva75c"]/div/div/div[3]/div[2]/c-wiz/div/div[1]/div[1]/div[2]/div[1]/a/img').get_attribute("src")
+            hak=imgUrl[imgUrl.rfind('.'):]
+            print(hak)
             opener=urllib.request.build_opener()
             opener.addheaders=[('User-Agent','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1941.0 Safari/537.36')]
             urllib.request.install_opener(opener)
@@ -61,7 +63,7 @@ def image_download(search):
             print(imgUrl)
             mem=urllib.request.urlopen(imgUrl, timeout = 0.5).read()
 
-            with open("크롤링 사진/"+search+"/"+search+str(count) + ".jpg",mode="wb") as f:
+            with open("크롤링 사진/"+search+"/"+search+str(count) + hak,mode="wb") as f:
                 f.write(mem)
             count = count + 1
             
